@@ -3,40 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Pendaftaran</title>
-    <link rel="stylesheet" href="codelab1.css">
+    <title>Penjumlahan</title>
+    <link rel="stylesheet" href="codelab2.css">
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>Form Pendaftaran</h2>
-        <form id="pendaftaranForm">
-            <label for="nama">Nama</label>
-            <input type="text" id="nama" placeholder="Masukkan nama lengkap">
-            
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Masukkan email">
-            
-            <label for="alamat">Alamat Lengkap</label>
-            <textarea id="alamat" placeholder="Masukkan alamat lengkap"></textarea>
-            
-            <button type="button" onclick="validasiForm()">Daftar</button>
-        </form>
+<div class="container">
+    <h2>Penjumlahan</h2>
+    <label for="num1">Bilangan pertama</label>
+    <input type="number" id="num1" placeholder="Masukkan bilangan pertama">
+    
+    <label for="num2">Bilangan kedua</label>
+    <input type="number" id="num2" placeholder="Masukkan bilangan kedua">
+    
+    <div>
+        <button class="btn-primary" onclick="hitung()">Jumlahkan</button>
+        <button class="btn-reset" onclick="reset()">Reset</button>
     </div>
 
-    <script>
-        function validasiForm() {
-            var nama = document.getElementById('nama').value;
-            var email = document.getElementById('email').value;
-            var alamat = document.getElementById('alamat').value;
+    <h3>Hasil: <span id="hasil">0</span></h3>
+</div>
 
-            if (nama === "" || email === "" || alamat === "") {
-                alert("Semua data harus diisi.");
-            } else {
-                alert("Pendaftaran berhasil!");
-            }
-        }
-    </script>
+<script>
+    function hitung() {
+        var bil1 = parseFloat(document.getElementById('num1').value);
+        var bil2 = parseFloat(document.getElementById('num2').value);
+        var hasil = bil1 + bil2;
+        document.getElementById('hasil').innerText = hasil;
+    }
+
+    function reset() {
+        document.getElementById('num1').value = '';
+        document.getElementById('num2').value = '';
+        document.getElementById('hasil').innerText = '0';
+    }
+</script>
 
 </body>
 </html>
