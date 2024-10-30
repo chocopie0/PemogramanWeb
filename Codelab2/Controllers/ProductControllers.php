@@ -3,7 +3,7 @@
 namespace Controller;
 
 include "Traits/ResponseFormatter.php";
-include "Controllers/Controller.php";
+include "Controllers/Controllers.php";
 
 use Traits\ResponseFormatter;
 

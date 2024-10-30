@@ -1,6 +1,6 @@
 <?php
 
-    include "Controllers/ProductController.php";
+    include "Controllers/ProductControllers.php";
 
     use Controller\ProductController;
 
