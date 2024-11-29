@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Produk - Hijab Shop</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div>Zendaya</div>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="products.html">Produk</a>
+                <a href="#">Tentang Kami</a>
+                <a href="#">Kontak</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1 id="form-title">Tambah Produk</h1>
+        <form id="product-form" enctype="multipart/form-data">
+            <label for="name">Nama Produk</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="price">Harga Produk</label>
+            <input type="number" id="price" name="price" required>
+
+            <label for="description">Deskripsi Produk</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <label for="image">Gambar Produk</label>
+            <input type="file" id="image" name="image" accept="image/*">
+
+            <button type="submit">Simpan</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Hijab Shop. All rights reserved.</p>
+    </footer>
+    <script>
+        const form = document.getElementById('product-form');
+        const title = document.getElementById('form-title');
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id'); // Get product ID if editing
+
+        // If editing, populate form with existing data
+        if (productId) {
+            title.textContent = 'Edit Produk';
+            fetch(`../php/product.php?id=${productId}`)
+                .then(response => response.json())
+                .then(product => {
+                    document.getElementById('name').value = product.name;
+                    document.getElementById('price').value = product.price;
+                    document.getElementById('description').value = product.description; // Add description
+                })
+                .catch(error => console.error('Error fetching product:', error));
+        }
+
+                form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form); 
+
+            const url = productId 
+                ? `../php/product.php?id=${productId}` 
+                : '../php/product.php';
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST', 
+                    body: formData,
+                });
+                const result = await response.json();
+                alert(result.message);
+                window.location.href = 'products.html'; // Redirect to product list
+            } catch (error) {
+                console.error('Error saving product:', error);
+            }
+        });
+    </script>
+</body>
+</html>
